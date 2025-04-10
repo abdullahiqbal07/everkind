@@ -15,6 +15,7 @@ import { useEffect } from "react";
 // Lazy loading components
 const NotFound = lazy(() => import("./pages/NotFound"));
 const Home = lazy(() => import("./pages/Home"));
+const Dummy = lazy(() => import("./pages/dummy"));
 
 function App() {
   // const [isDataLoading, setIsDataLoading] = useState(true);
@@ -49,9 +50,12 @@ function App() {
           <Route path='/signup' element={<SignUp />} /> */}
 
           <Route path="/home" element={<Home />} />
+          <Route path="/dummy" element={<Dummy />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </Suspense>
   );
 }
+
+export default App;
