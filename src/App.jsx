@@ -1,18 +1,23 @@
-import { Suspense, lazy } from 'react';
-import { BrowserRouter, Navigate, Outlet, Route, Routes, useLocation } from 'react-router-dom';
+import { Suspense, lazy } from "react";
+import {
+  BrowserRouter,
+  Navigate,
+  Outlet,
+  Route,
+  Routes,
+  useLocation,
+} from "react-router-dom";
 // import { authenticate } from './context/AuthContext';
 
 // import { useContext } from 'react';
-import { useEffect } from 'react';
+import { useEffect } from "react";
 
 // Lazy loading components
-const NotFound = lazy(() => import('./pages/NotFound'));
-const Home = lazy(()=> import('./pages/Home'))
-
+const NotFound = lazy(() => import("./pages/NotFound"));
+const Home = lazy(() => import("./pages/Home"));
 
 function App() {
-  const [isDataLoading, setIsDataLoading] = useState(true);
-
+  // const [isDataLoading, setIsDataLoading] = useState(true);
 
   // const ProtectedRoute = ({ Children }) => {
   //   // handle it from backend
@@ -31,9 +36,7 @@ function App() {
   //   );
   // }
 
-
   return (
-
     // i want to home after sign in
 
     <Suspense fallback=".....loading">
@@ -44,14 +47,11 @@ function App() {
           {/* </Route> */}
           {/* <Route path='/signin' element={<SignIn />} />
           <Route path='/signup' element={<SignUp />} /> */}
-          
-          <Route path='/home' element={<Home />} />
+
+          <Route path="/home" element={<Home />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </Suspense>
-  )
+  );
 }
-
-
-
