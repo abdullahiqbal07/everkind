@@ -1,4 +1,5 @@
-/* Reset some basic browser styles */
+@import "tailwindcss";
+
 * {
     margin: 0;
     padding: 0;
