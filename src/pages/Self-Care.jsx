@@ -18,9 +18,12 @@ import image7 from "../assets/images/selfcare/image 7.png";
 import vector from "../assets/images/selfcare/vector.png";
 import image3 from "../assets/images/selfcare/image 3.png";
 import image14 from "../assets/images/selfcare/image 1.png";
+import Navbar from "../components/NavBar";
 
 export default function SelfCareSanctuary() {
   return (
+    <>
+    <Navbar />
     <div className="bg-white p-8 max-w-7xl mx-auto">
       {/* Hero Section */}
       <div className="relative mb-12 rounded-lg overflow-hidden">
@@ -194,5 +197,6 @@ export default function SelfCareSanctuary() {
         </div>
       </section>
     </div>
+    </>
   );
 }
