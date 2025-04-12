@@ -134,7 +134,7 @@ const HomePage = () => {
       
       {/* Customer Love Section */}
       <section className="container mx-auto py-16 px-6 md:px-8 lg:px-12">
-        <h2 className="text-2xl font-bold mb-8 text-center">Customer Love</h2>
+        <h2 className="text-2xl font-bold mb-8">Customer Love</h2>
         
         <div className="max-w-3xl mx-auto">
           <TestimonialCard 
