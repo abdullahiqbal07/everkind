@@ -12,41 +12,76 @@ const Login = () => {
 
   const navigate = useNavigate()
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    // Check if email already exists
-    const emailExists = Data.some(user => user.email === email);
-    
-    if (emailExists) {
-      setMessage("This email is already registered. Please use a different email.");
-      return;
+  
+    try {
+      const response = await fetch('http://localhost:5000/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name: username,
+          email,
+          password
+        })
+      });
+  
+      if (!response.ok) {
+        const error = await response.text();
+        setMessage(error);
+      } else {
+        setMessage("Signup successful! You can now login.");
+        setUsername("");
+        setEmail("");
+        setPassword("");
+        setRememberMe(false);
+        navigate('/signin');
+      }
+  
+    } catch (error) {
+      console.error('Error during signup:', error);
+      setMessage("Something went wrong.");
     }
-    
-    // Add new user to Data array
-    Data.push({
-      name: username,
-      email: email,
-      password: password
-    });
-    
-    console.log("User registered successfully:", {
-      username,
-      email,
-      password,
-      rememberMe,
-    });
-    
-    console.log("Updated user data:", Data);
-    
-    // Reset form fields after successful signup
-    setUsername("");
-    setEmail("");
-    setPassword("");
-    setRememberMe(false);
-    setMessage("Signup successful! You can now login.");
-    navigate('/signin')
   };
+  
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+    
+  //   // Check if email already exists
+  //   const emailExists = Data.some(user => user.email === email);
+    
+  //   if (emailExists) {
+  //     setMessage("This email is already registered. Please use a different email.");
+  //     return;
+  //   }
+    
+  //   // Add new user to Data array
+  //   Data.push({
+  //     name: username,
+  //     email: email,
+  //     password: password
+  //   });
+    
+  //   console.log("User registered successfully:", {
+  //     username,
+  //     email,
+  //     password,
+  //     rememberMe,
+  //   });
+    
+  //   console.log("Updated user data:", Data);
+    
+  //   // Reset form fields after successful signup
+  //   setUsername("");
+  //   setEmail("");
+  //   setPassword("");
+  //   setRememberMe(false);
+  //   setMessage("Signup successful! You can now login.");
+  //   navigate('/signin')
+  // };
 
   return (
     <>
@@ -146,6 +181,7 @@ const Login = () => {
           </form>
 
           <div className="text-center mt-4">
+
 
             <div className="text-sm text-gray-500">
               Already have an account?

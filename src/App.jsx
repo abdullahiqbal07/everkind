@@ -126,7 +126,7 @@ function App() {
       <Routes>
         <Route path="/" element={<ProtectedRoute />}>
           <Route index element={<Home />} /> {/* Make Home the default for root URL */}
-          <Route path="home" element={<Home />} />
+          {/* <Route path="home" element={<Home />} /> */}
           <Route path="dummy" element={<Dummy />} />
           <Route path="story" element={<Story />} />
           <Route path="self-care" element={<SelfCare />} />
