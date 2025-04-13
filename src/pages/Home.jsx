@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "../components/NavBar";
 import Gentle from "../assets/best-sellers/Gentle.png";
 import Nourishing from "../assets/best-sellers/Nourishing Face Oil.png";
@@ -15,19 +15,48 @@ import Natural from "../assets/Choose/Natural Ingredients.png";
 import Isabella from "../assets/Reviews/Isabella L.png";
 import Olivia from "../assets/Reviews/Olivia R.png";
 import Sophia from "../assets/Reviews/Sophia M.png";
+import { useCart } from "../context/CartContext";
 import Footer from "../components/Footer";
 
 import { useNavigate, Link } from "react-router-dom";
 
-const ProductCard = ({ imageSrc, title, description }) => {
+// Update the ProductCard component to include price and an Add to Cart button
+const ProductCard = ({ imageSrc, title, description, price }) => {
+  const { addToCart } = useCart();
+  const [isAdded, setIsAdded] = useState(false);
+
+  const handleAddToCart = () => {
+    addToCart({
+      name: title,
+      price: parseFloat(price),
+      quantity: 1,
+      description: description,
+      image: imageSrc,
+    });
+    setIsAdded(true);
+  };
 
   return (
-    <div className="flex flex-col">
-      <div className="rounded-lg overflow-hidden bg-stone-100 mb-3">
-        <img src={imageSrc} alt={title} className="w-full h-64 object-cover" />
+    <div className="rounded-lg shadow-md overflow-hidden bg-white">
+      <img src={imageSrc} alt={title} className="w-full h-48 object-cover" />
+      <div className="p-4">
+        <h3 className="text-lg font-semibold mb-2">{title}</h3>
+        <p className="text-gray-600 mb-4">{description}</p>
+        <div className="flex items-center justify-between">
+          <span className="text-xl font-bold">${price}</span>
+          <button
+            onClick={handleAddToCart}
+            disabled={isAdded}
+            className={`px-4 py-2 rounded ${
+              isAdded
+                ? "bg-gray-400"
+                : "bg-pink-300  hover:bg-pink-400 text-gray-800"
+            }`}
+          >
+            {isAdded ? "Added to Cart" : "Add to Cart"}
+          </button>
+        </div>
       </div>
-      <h3 className="font-medium text-lg mb-1">{title}</h3>
-      <p className="text-gray-600 text-sm">{description}</p>
     </div>
   );
 };
@@ -86,31 +115,36 @@ const Button = ({ children, primary, className }) => {
 
 // Main App Component
 function App() {
-  
+  // Mock data for products
   // Mock data for products
   const products = [
     {
       id: 1,
       imageSrc: Gentle,
+      title: "Gentle Cleansing Balm",
       description: "A gentle balm to melt away makeup and impurities",
+      price: "32.99",
     },
     {
       id: 2,
       imageSrc: Nourishing,
       title: "Nourishing Face Oil",
       description: "A lightweight oil for hydration and radiant skin",
+      price: "28.50",
     },
     {
       id: 3,
       imageSrc: Calming,
       title: "Calming Herbal Tea Blend",
       description: "A blend of herbs to promote relaxation and calm",
+      price: "18.95",
     },
     {
       id: 4,
       imageSrc: Soothing,
       title: "Soothing Lavender Balm",
       description: "A multi-purpose balm for dry skin and minor irritations",
+      price: "24.99",
     },
   ];
 
@@ -211,15 +245,14 @@ function App() {
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
             <Link to="">
-            <Button primary>Shop Now</Button>
+              <Button primary>Shop Now</Button>
             </Link>
             <Link to="/self-care">
-            <Button>Explore Self Care</Button>
+              <Button>Explore Self Care</Button>
             </Link>
           </div>
         </div>
       </div>
-
       {/* Best Sellers Section */}
       <section className="my-16">
         <h2 className="text-3xl font-bold mb-8">Best Sellers</h2>
@@ -230,6 +263,7 @@ function App() {
               imageSrc={product.imageSrc}
               title={product.title}
               description={product.description}
+              price={product.price}
             />
           ))}
         </div>
