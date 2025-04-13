@@ -17,7 +17,10 @@ import Olivia from "../assets/Reviews/Olivia R.png";
 import Sophia from "../assets/Reviews/Sophia M.png";
 import Footer from "../components/Footer";
 
+import { useNavigate, Link } from "react-router-dom";
+
 const ProductCard = ({ imageSrc, title, description }) => {
+
   return (
     <div className="flex flex-col">
       <div className="rounded-lg overflow-hidden bg-stone-100 mb-3">
@@ -83,6 +86,7 @@ const Button = ({ children, primary, className }) => {
 
 // Main App Component
 function App() {
+  
   // Mock data for products
   const products = [
     {
@@ -206,8 +210,12 @@ function App() {
             planet.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
+            <Link to="">
             <Button primary>Shop Now</Button>
+            </Link>
+            <Link to="/self-care">
             <Button>Explore Self Care</Button>
+            </Link>
           </div>
         </div>
       </div>
