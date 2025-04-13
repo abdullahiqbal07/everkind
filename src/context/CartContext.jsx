@@ -11,7 +11,6 @@ export const useCart = () => useContext(CartContext);
 
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
-
   const [recommendedItems] = useState([
     {
       id: 3,
@@ -35,21 +34,26 @@ export const CartProvider = ({ children }) => {
       image: Precision,
     },
   ]);
-
   const [paymentSuccess, setPaymentSuccess] = useState(false);
 
   const addToCart = (item) => {
-    const existingItem = cartItems.find((cartItem) => cartItem.id === item.id);
+    // Ensure the item has an id
+    if (!item.id) {
+      // Generate a unique id if none exists
+      item.id = Date.now().toString();
+    }
 
-    if (existingItem) {
-      setCartItems(
-        cartItems.map((cartItem) =>
-          cartItem.id === item.id
-            ? { ...cartItem, quantity: cartItem.quantity + 1 }
-            : cartItem
-        )
-      );
+    const existingItemIndex = cartItems.findIndex(
+      (cartItem) => cartItem.id === item.id
+    );
+
+    if (existingItemIndex !== -1) {
+      // Update existing item quantity
+      const updatedItems = [...cartItems];
+      updatedItems[existingItemIndex].quantity += 1;
+      setCartItems(updatedItems);
     } else {
+      // Add new item to cart
       setCartItems([...cartItems, { ...item, quantity: 1 }]);
     }
   };
@@ -62,6 +66,11 @@ export const CartProvider = ({ children }) => {
         item.id === id ? { ...item, quantity: newQuantity } : item
       )
     );
+  };
+
+  // Add removeFromCart function
+  const removeFromCart = (id) => {
+    setCartItems(cartItems.filter((item) => item.id !== id));
   };
 
   const handlePaymentSuccess = () => {
@@ -81,6 +90,7 @@ export const CartProvider = ({ children }) => {
         paymentSuccess,
         addToCart,
         updateQuantity,
+        removeFromCart, // Add the new function to the context
         handlePaymentSuccess,
         resetCart,
       }}

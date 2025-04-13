@@ -21,12 +21,13 @@ import Footer from "../components/Footer";
 import { useNavigate, Link } from "react-router-dom";
 
 // Update the ProductCard component to include price and an Add to Cart button
-const ProductCard = ({ imageSrc, title, description, price }) => {
+const ProductCard = ({ id, imageSrc, title, description, price }) => {
   const { addToCart } = useCart();
   const [isAdded, setIsAdded] = useState(false);
 
   const handleAddToCart = () => {
     addToCart({
+      id: id, // Make sure each product has a unique ID
       name: title,
       price: parseFloat(price),
       quantity: 1,
@@ -50,7 +51,7 @@ const ProductCard = ({ imageSrc, title, description, price }) => {
             className={`px-4 py-2 rounded ${
               isAdded
                 ? "bg-gray-400"
-                : "bg-pink-300  hover:bg-pink-400 text-gray-800"
+                : "bg-pink-300 hover:bg-pink-400 text-gray-800"
             }`}
           >
             {isAdded ? "Added to Cart" : "Add to Cart"}
