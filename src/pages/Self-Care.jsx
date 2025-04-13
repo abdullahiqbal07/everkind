@@ -19,6 +19,8 @@ import vector from "../assets/images/selfcare/vector.png";
 import image3 from "../assets/images/selfcare/image 3.png";
 import image14 from "../assets/images/selfcare/image 1.png";
 import Navbar from "../components/NavBar";
+import { Link } from "react-router-dom";
+import Footer from "../components/Footer"
 
 export default function SelfCareSanctuary() {
   return (
@@ -190,13 +192,16 @@ export default function SelfCareSanctuary() {
           </p>
 
           <div className="flex justify-center">
+            <Link to="/">
             <button className="px-8 py-4 bg-purple-300 text-gray-800 rounded-full text-lg font-medium hover:bg-purple-400 transition-colors duration-300">
               Explore All Products
             </button>
+            </Link>
           </div>
         </div>
       </section>
     </div>
+    <Footer />
     </>
   );
 }
