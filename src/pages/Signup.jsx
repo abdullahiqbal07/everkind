@@ -45,43 +45,6 @@ const Login = () => {
       setMessage("Something went wrong.");
     }
   };
-  
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-    
-  //   // Check if email already exists
-  //   const emailExists = Data.some(user => user.email === email);
-    
-  //   if (emailExists) {
-  //     setMessage("This email is already registered. Please use a different email.");
-  //     return;
-  //   }
-    
-  //   // Add new user to Data array
-  //   Data.push({
-  //     name: username,
-  //     email: email,
-  //     password: password
-  //   });
-    
-  //   console.log("User registered successfully:", {
-  //     username,
-  //     email,
-  //     password,
-  //     rememberMe,
-  //   });
-    
-  //   console.log("Updated user data:", Data);
-    
-  //   // Reset form fields after successful signup
-  //   setUsername("");
-  //   setEmail("");
-  //   setPassword("");
-  //   setRememberMe(false);
-  //   setMessage("Signup successful! You can now login.");
-  //   navigate('/signin')
-  // };
 
   return (
     <>

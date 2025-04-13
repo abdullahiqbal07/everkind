@@ -105,7 +105,7 @@ import NavBar from "./components/NavBar"; // Make sure this import is correct
 const NotFound = lazy(() => import("./pages/NotFound"));
 const Home = lazy(() => import("./pages/Home"));
 const Dummy = lazy(() => import("./pages/dummy"));
-
+const FAQ = lazy(() => import("./pages/Faq"));
 const ShoppingCart = lazy(() => import("./pages/ShoppingCartPage"));
 const Checkout = lazy(() => import("./pages/CheckoutPage"));
 const OrderConfirmation = lazy(() => import("./pages/ConfirmationPage"));
@@ -136,6 +136,7 @@ function App() {
           <Route path="checkout" element={<Checkout />} />
           <Route path="order-confirmation" element={<OrderConfirmation />} />
           <Route path="contacts" element={<Contact />} />
+          <Route path="faqs" element={<FAQ />} />
         </Route>
 
         <Route path="signin" element={<SignIn />} />

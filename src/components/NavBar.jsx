@@ -22,7 +22,7 @@ export default function Navbar() {
       <div className="flex items-center space-x-2">
         <img src={logo} alt="Logo" className="w-6 h-6 object-contain mr-1" />
 
-        <span className="text-pink-300 font-light text-xl tracking-wide">
+        <span className="text-pink-300 font-bold text-xl tracking-wide">
           everkind
         </span>
       </div>

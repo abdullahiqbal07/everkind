@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaChevronDown } from "react-icons/fa";
 import Navbar from "../components/NavBar";
+import Footer from "../components/Footer";
 // FAQ Item Component
 const FAQItem = ({ question, answer }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -83,7 +84,7 @@ const FAQSection = () => {
         <div className="mt-12 text-center">
           <p className="text-gray-600 mb-4">Still have questions?</p>
           <Link 
-            to="/contact"
+            to="/contacts"
             className="bg-pink-300 hover:bg-pink-400 text-white px-6 py-2 rounded-full inline-block"
           >
             Contact Support
@@ -99,6 +100,7 @@ const Faq = () => {
     <>
         <Navbar />
         <FAQSection />
+        <Footer />
     </>
   )
 }
