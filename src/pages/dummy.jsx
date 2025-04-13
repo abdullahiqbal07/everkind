@@ -7,12 +7,13 @@ import Account from "./Account";
 import SelfCare from "./Self-Care";
 import Blog from "./Blog";
 import FAQSection from "./Faq";
+import Base from "./Base";
 
 const dummy = () => {
   return (
     <div>
 
-      <FAQSection />
+      <Base />
 
     </div>
   );
