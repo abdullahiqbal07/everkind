@@ -7,13 +7,12 @@ import Account from "./Account";
 import SelfCare from "./Self-Care";
 import Blog from "./Blog";
 import FAQSection from "./Faq";
+import Contact from "./Contact";
 
 const dummy = () => {
   return (
     <div>
-
-      <FAQSection />
-
+      <Contact />
     </div>
   );
 };
