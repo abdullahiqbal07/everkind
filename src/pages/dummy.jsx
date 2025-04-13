@@ -8,11 +8,12 @@ import SelfCare from "./Self-Care";
 import Blog from "./Blog";
 import FAQSection from "./Faq";
 import Contact from "./Contact";
+import Signup from "./Signup";
 
 const dummy = () => {
   return (
     <div>
-      <Contact />
+      <Signup />
     </div>
   );
 };
