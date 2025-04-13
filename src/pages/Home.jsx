@@ -15,8 +15,8 @@ import Natural from "../assets/Choose/Natural Ingredients.png";
 import Isabella from "../assets/Reviews/Isabella L.png";
 import Olivia from "../assets/Reviews/Olivia R.png";
 import Sophia from "../assets/Reviews/Sophia M.png";
-import Footer from "../components/Footer";
 import { useCart } from "../context/CartContext";
+import Footer from "../components/Footer";
 
 import { useNavigate, Link } from "react-router-dom";
 
