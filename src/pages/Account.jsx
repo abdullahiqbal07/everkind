@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import {
   Package,
   ShoppingCart,
@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import Navbar from "../components/NavBar";
 import image from "../assets/images/Account/image1.png";
+import { authenticate } from "../context/AuthContext"; // Update path as needed
 
 export default function AccountPage() {
   const [userData] = useState({
@@ -21,6 +22,9 @@ export default function AccountPage() {
     email: "sophia.carter@example.com",
     phone: "(555) 123-4567",
   });
+
+  const { logout, user } = useContext(authenticate);
+  console.log(user);
 
   const accountOptions = [
     {
@@ -82,17 +86,26 @@ export default function AccountPage() {
         {/* Profile Section */}
         <div className="flex flex-col items-center mb-8">
           <div className="w-24 h-24 rounded-full overflow-hidden mb-4">
-            <img
-              src={image}
-              alt="User profile"
-              className="w-full h-full object-cover"
-            />
+            {user.image ? (
+              <img
+                src={user.image}
+                alt="User profile"
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              <img
+                src={`https://ui-avatars.com/api/?name=${encodeURIComponent(
+                  user.name
+                )}&background=random&color=fff&rounded=true&size=96`}
+                alt="User Avatar"
+                className="w-full h-full object-cover"
+              />
+            )}
           </div>
-          <h2 className="text-2xl font-bold text-gray-800 mb-1">
-            {userData.name}
-          </h2>
+
+          <h2 className="text-2xl font-bold text-gray-800 mb-1">{user.name}</h2>
           <p className="text-gray-600 mb-4">
-            {userData.email} · {userData.phone}
+            {user.email} · {userData.phone}
           </p>
 
           <button className="bg-gray-100 text-gray-800 px-6 py-2 rounded-full text-sm font-medium">
@@ -126,7 +139,10 @@ export default function AccountPage() {
 
         {/* Log Out Button */}
         <div className="mt-8">
-          <button className="bg-gray-100 text-gray-800 px-8 py-3 rounded-full text-sm font-medium">
+          <button
+            className="bg-gray-100 text-gray-800 px-8 py-3 rounded-full text-sm font-medium"
+            onClick={logout}
+          >
             Log Out
           </button>
         </div>

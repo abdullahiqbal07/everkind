@@ -1,22 +1,51 @@
 import React, { useState } from "react";
 import Header from "../components/NavBar";
 import Footer from "../components/Footer";
-
+import Data from './Data/User'; // Updated import path based on your file structure
+import { useNavigate } from "react-router-dom";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
+  const [message, setMessage] = useState("");
+
+  const navigate = useNavigate()
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Signup attempt with:", {
+    
+    // Check if email already exists
+    const emailExists = Data.some(user => user.email === email);
+    
+    if (emailExists) {
+      setMessage("This email is already registered. Please use a different email.");
+      return;
+    }
+    
+    // Add new user to Data array
+    Data.push({
+      name: username,
+      email: email,
+      password: password
+    });
+    
+    console.log("User registered successfully:", {
       username,
       email,
       password,
       rememberMe,
     });
-    // Implement actual authentication logic here
+    
+    console.log("Updated user data:", Data);
+    
+    // Reset form fields after successful signup
+    setUsername("");
+    setEmail("");
+    setPassword("");
+    setRememberMe(false);
+    setMessage("Signup successful! You can now login.");
+    navigate('/signin')
   };
 
   return (
@@ -29,10 +58,16 @@ const Login = () => {
             </h2>
           </div>
 
+          {message && (
+            <div className={`mb-4 p-2 text-center rounded ${message.includes("successful") ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"}`}>
+              {message}
+            </div>
+          )}
+
           <form onSubmit={handleSubmit} className="px-4">
             <div className="mb-4 text-left ml-[-300px]">
               <label
-                htmlFor="email"
+                htmlFor="username"
                 className="block mb-2 text-gray-700 font-bold"
               >
                 Username
@@ -40,7 +75,7 @@ const Login = () => {
               <input
                 id="username"
                 name="username"
-                type="Username"
+                type="text"
                 required
                 className="px-3 py-3 border border-gray-300 rounded-2xl w-[400px]"
                 placeholder="Enter your username"
@@ -111,12 +146,6 @@ const Login = () => {
           </form>
 
           <div className="text-center mt-4">
-            <div className="text-sm mb-1 ml-[-600px]">
-              New user?
-              <a href="#" className="ml-1 text-blue-600 hover:text-blue-500">
-                Signup here
-              </a>
-            </div>
 
             <div className="text-sm text-gray-500">
               Already have an account?

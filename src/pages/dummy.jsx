@@ -8,7 +8,7 @@ import SelfCare from "./Self-Care";
 import Blog from "./Blog";
 import FAQSection from "./Faq";
 
-import Base from "./Base";
+// import Base from "./Base";
 import Contact from "./Contact";
 import Signup from "./Signup";
 
@@ -17,7 +17,7 @@ const dummy = () => {
     <div>
 
 
-      <Contact />
+      <Signup />
 
 
     </div>
