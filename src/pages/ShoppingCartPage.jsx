@@ -3,8 +3,12 @@ import { Link } from "react-router-dom";
 import { FaPlus, FaMinus, FaTrash } from "react-icons/fa";
 import { useCart } from "../context/CartContext";
 import Navbar from "../components/NavBar";
+import { loadStripe } from "@stripe/stripe-js";
 
 const ShoppingCart = () => {
+  const stripePromise = loadStripe(
+    "pk_test_51NaGtHDpRq1L8I0l29nhPeAPzvvJU5LXQYZdUj44c7n1DKPXQ86sguKlwtRWwZL8Ea9nd9T0JFk8saH7fLRnXGz100iR8G4dRB"
+  );
   const {
     cartItems,
     recommendedItems,
@@ -16,6 +20,36 @@ const ShoppingCart = () => {
     (total, item) => total + item.price * item.quantity,
     0
   );
+
+  const handleCheckout = async () => {
+    const stripe = await stripePromise;
+
+    const itemsToSend = cartItems.map((item) => ({
+      id: item.id,
+      name: item.name,
+      quantity: item.quantity,
+      price: Math.floor(item.price * 100), // Stripe expects price in cents
+    }));
+
+    const response = await fetch(
+      "http://localhost:5000/create-checkout-session",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        mode: "cors",
+        body: JSON.stringify({ items: itemsToSend }),
+      }
+    );
+
+    if (response.status === 200) {
+      const result = await response.json();
+      window.location = result.url;
+    } else {
+      console.error("Failed to create checkout session");
+    }
+  };
 
   return (
     <>
@@ -110,17 +144,16 @@ const ShoppingCart = () => {
                 </div>
               </div>
 
-              <Link
-                to="/checkout"
+              <button
                 className={`block w-full text-center py-3 rounded-lg font-medium transition ${
                   cartItems.length === 0
                     ? "bg-gray-300 cursor-not-allowed"
                     : "bg-pink-300 hover:bg-pink-400"
                 }`}
-                onClick={(e) => cartItems.length === 0 && e.preventDefault()}
+                onClick={handleCheckout}
               >
                 Proceed to checkout
-              </Link>
+              </button>
             </div>
           </div>
         </div>

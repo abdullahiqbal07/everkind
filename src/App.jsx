@@ -94,11 +94,11 @@ import {
   Route,
   Routes,
   useLocation,
-  useNavigate
+  useNavigate,
 } from "react-router-dom";
 import { useEffect } from "react";
 import { CartProvider } from "./context/CartContext";
-import AuthContext from "./context/AuthContext"; 
+import AuthContext from "./context/AuthContext";
 import NavBar from "./components/NavBar"; // Make sure this import is correct
 
 // Lazy loading components
@@ -125,7 +125,8 @@ function App() {
     return (
       <Routes>
         <Route path="/" element={<ProtectedRoute />}>
-          <Route index element={<Home />} /> {/* Make Home the default for root URL */}
+          <Route index element={<Home />} />{" "}
+          {/* Make Home the default for root URL */}
           {/* <Route path="home" element={<Home />} /> */}
           <Route path="dummy" element={<Dummy />} />
           <Route path="story" element={<Story />} />
@@ -150,7 +151,13 @@ function App() {
     <BrowserRouter>
       <AuthContext>
         <CartProvider>
-          <Suspense fallback={<div className="flex items-center justify-center h-screen">Loading...</div>}>
+          <Suspense
+            fallback={
+              <div className="flex items-center justify-center h-screen">
+                Loading...
+              </div>
+            }
+          >
             <AppRoutes />
           </Suspense>
         </CartProvider>
@@ -162,14 +169,15 @@ function App() {
 // Extracted ProtectedRoute to fix React Hook errors
 const ProtectedRoute = () => {
   // Check for auth in both localStorage and sessionStorage
-  const userAuth = localStorage.getItem("userAuth") || sessionStorage.getItem("userAuth");
+  const userAuth =
+    localStorage.getItem("userAuth") || sessionStorage.getItem("userAuth");
   const location = useLocation();
-  
+
   if (!userAuth) {
     // Redirect to signin and save the attempted location
     return <Navigate to="/signin" replace state={{ from: location }} />;
   }
-  
+
   return (
     <>
       {/* <NavBar style={{ position: "fixed" }} /> */}
