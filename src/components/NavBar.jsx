@@ -72,7 +72,7 @@ export default function Navbar() {
       {/* Cart and Profile */}
       <div className="flex items-center space-x-4">
         <div
-          className="flex items-center bg-gray-100 px-3 py-1 rounded-full"
+          className="flex items-center bg-gray-100 px-3 py-1 rounded-full cursor-pointer"
           onClick={handleClick}
         >
           <FaShoppingCart className="text-gray-700 mr-2" />

@@ -3,12 +3,10 @@ import { Link } from "react-router-dom";
 import { FaPlus, FaMinus, FaTrash } from "react-icons/fa";
 import { useCart } from "../context/CartContext";
 import Navbar from "../components/NavBar";
-import { loadStripe } from "@stripe/stripe-js";
+
 
 const ShoppingCart = () => {
-  const stripePromise = loadStripe(
-    "pk_test_51NaGtHDpRq1L8I0l29nhPeAPzvvJU5LXQYZdUj44c7n1DKPXQ86sguKlwtRWwZL8Ea9nd9T0JFk8saH7fLRnXGz100iR8G4dRB"
-  );
+  
   const {
     cartItems,
     recommendedItems,
@@ -22,7 +20,6 @@ const ShoppingCart = () => {
   );
 
   const handleCheckout = async () => {
-    const stripe = await stripePromise;
 
     const itemsToSend = cartItems.map((item) => ({
       id: item.id,

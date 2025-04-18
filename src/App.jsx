@@ -135,7 +135,7 @@ function App() {
           <Route path="profile" element={<AccountPage />} />
           <Route path="cart" element={<ShoppingCart />} />
           <Route path="checkout" element={<Checkout />} />
-          <Route path="order-confirmation" element={<OrderConfirmation />} />
+          <Route path="success" element={<OrderConfirmation />} />
           <Route path="contacts" element={<Contact />} />
           <Route path="faqs" element={<FAQ />} />
         </Route>

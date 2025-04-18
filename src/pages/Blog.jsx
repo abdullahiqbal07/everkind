@@ -69,7 +69,7 @@ const HomePage = () => {
           <img 
             src={Blog1}
             alt="Woman applying skincare product"
-            className="w-full h-[500px] object-cover"
+            className="w-full h-[500px] object-contain"
           />
           {/* <div className="absolute inset-0 bg-black bg-opacity-20 flex flex-col justify-center px-8 md:px-16">
             <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">Radiate Naturally with Everkind</h1>

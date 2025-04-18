@@ -6,11 +6,6 @@ import { useCart } from '../context/CartContext';
 const OrderConfirmation = () => {
   const { paymentSuccess, resetCart } = useCart();
   
-  // If not coming from a successful payment, redirect to home
-  if (!paymentSuccess) {
-    return <Navigate to="/" />;
-  }
-  
   return (
     <div className="container mx-auto px-4 py-16 max-w-2xl text-center">
       <div className="bg-white p-8 rounded-lg shadow-md">
@@ -24,12 +19,8 @@ const OrderConfirmation = () => {
           Thank you for your purchase. Your order has been confirmed and will be shipped soon.
         </p>
         
-        <div className="bg-gray-50 p-4 rounded-lg mb-6">
-          <p className="font-medium">Order confirmation has been sent to your email.</p>
-        </div>
-        
         <Link 
-          to="/home"
+          to="/"
           onClick={resetCart}
           className="inline-block px-6 py-3 bg-pink-300 hover:bg-pink-400 rounded-lg font-medium transition"
         >
